@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+      - ai
+
+  backend:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.backend
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+      - JWT_SECRET=your_jwt_secret
+    depends_on:
+      - ai
+
+  ai:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.ai
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+      - OPENAI_API_KEY=your_openai_api_key
+      - ANTHROPIC_API_KEY=your_anthropic_api_key
+      - SAMBANOVA_API_KEY=your_sambanova_api_key
+      - DEEPSEEK_API_KEY=your_deepseek_api_key

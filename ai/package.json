@@ -1,0 +1,24 @@
+{
+  "name": "procurement-webapp-ai",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "test": "jest"
+  },
+  "dependencies": {
+    "langchain": "latest",
+    "@qdrant/js-client-rest": "latest",
+    "bullmq": "latest",
+    "typescript": "latest",
+    "ts-node": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "eslint": "latest",
+    "jest": "latest",
+    "ts-jest": "latest"
+  }
+}

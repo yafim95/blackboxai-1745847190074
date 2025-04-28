@@ -1,0 +1,43 @@
+{
+  "roles": [
+    {
+      "name": "employee",
+      "permissions": [
+        "view_projects",
+        "create_bids",
+        "view_reports",
+        "chat_with_ai"
+      ]
+    },
+    {
+      "name": "manager",
+      "permissions": [
+        "view_projects",
+        "create_projects",
+        "edit_projects",
+        "view_contracts",
+        "approve_bids",
+        "view_reports",
+        "manage_users",
+        "chat_with_ai"
+      ]
+    },
+    {
+      "name": "admin",
+      "permissions": [
+        "view_projects",
+        "create_projects",
+        "edit_projects",
+        "delete_projects",
+        "manage_contracts",
+        "manage_rfps",
+        "manage_bids",
+        "manage_reports",
+        "manage_users",
+        "manage_roles",
+        "view_audit_logs",
+        "chat_with_ai"
+      ]
+    }
+  ]
+}

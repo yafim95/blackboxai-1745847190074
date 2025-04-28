@@ -1,0 +1,23 @@
+# Use official Node.js image as base
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY ai/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy AI service source code
+COPY ai/ .
+
+# Build the AI service
+RUN npm run build
+
+# Expose port
+EXPOSE 5000
+
+# Start the AI service
+CMD ["npm", "start"]

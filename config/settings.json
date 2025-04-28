@@ -1,0 +1,61 @@
+{
+  "featureToggles": {
+    "enableComplianceAnalyzer": true,
+    "enableInteractiveChatbot": true,
+    "enableDocumentViewer": true,
+    "enableComparisonTables": true,
+    "enableAuditTrail": true
+  },
+  "aiProviders": [
+    {
+      "name": "OpenAI",
+      "apiKey": "YOUR_OPENAI_API_KEY",
+      "models": {
+        "embedding": "text-embedding-ada-002",
+        "generation": "gpt-4"
+      },
+      "priority": 1,
+      "enabled": true
+    },
+    {
+      "name": "Anthropic",
+      "apiKey": "YOUR_ANTHROPIC_API_KEY",
+      "models": {
+        "embedding": "claude-embedding-1",
+        "generation": "claude-v1"
+      },
+      "priority": 2,
+      "enabled": true
+    },
+    {
+      "name": "SambaNova",
+      "apiKey": "YOUR_SAMBANOVA_API_KEY",
+      "priority": 3,
+      "enabled": true
+    },
+    {
+      "name": "Deepseek",
+      "apiKey": "YOUR_DEEPSEEK_API_KEY",
+      "priority": 4,
+      "enabled": true
+    }
+  ],
+  "modelSettings": {
+    "temperature": 0.7,
+    "maxTokens": 1024,
+    "chunkSize": 500,
+    "similarityThreshold": 0.8
+  },
+  "complianceRules": {
+    "enabled": true,
+    "rules": [
+      "No confidential data leakage",
+      "GDPR compliance",
+      "Contractual obligations"
+    ]
+  },
+  "idGenerationRules": {
+    "yearFormat": "YYYY",
+    "sequencePadding": 4
+  }
+}

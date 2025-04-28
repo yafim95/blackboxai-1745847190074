@@ -1,0 +1,125 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies and lint frontend
+        run: |
+          cd frontend
+          npm install
+          npm run lint
+      - name: Install dependencies and lint backend
+        run: |
+          cd backend
+          npm install
+          npm run lint
+      - name: Install dependencies and lint AI service
+        run: |
+          cd ai
+          npm install
+          npm run lint
+
+  build:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build
+      - name: Build backend
+        run: |
+          cd backend
+          npm install
+          npm run build
+      - name: Build AI service
+        run: |
+          cd ai
+          npm install
+          npm run build
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Test frontend
+        run: |
+          cd frontend
+          npm install
+          npm test
+      - name: Test backend
+        run: |
+          cd backend
+          npm install
+          npm test
+      - name: Test AI service
+        run: |
+          cd ai
+          npm install
+          npm test
+
+  storybook-deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Build Storybook
+        run: |
+          cd frontend
+          npm install
+          npm run build-storybook
+      - name: Deploy Storybook
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: frontend/storybook-static
+
+  docker-build-push:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: user/procurement-frontend:latest,user/procurement-backend:latest,user/procurement-ai:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: docker-build-push
+    steps:
+      - name: Deploy frontend to Vercel
+        run: echo "Deploy frontend to Vercel (implement your deployment script here)"
+      - name: Deploy backend and AI to AWS Fargate or Heroku
+        run: echo "Deploy backend and AI services (implement your deployment script here)"

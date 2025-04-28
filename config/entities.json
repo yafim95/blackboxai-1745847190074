@@ -1,0 +1,97 @@
+{
+  "entities": [
+    {
+      "key": "project",
+      "label": "Project",
+      "apiPath": "/projects",
+      "referenceIdPattern": "PROJ-{YYYY}-{SEQ}",
+      "enabled": true,
+      "fields": [
+        {"name": "name", "type": "string", "label": "Project Name", "required": true},
+        {"name": "description", "type": "string", "label": "Description"},
+        {"name": "startDate", "type": "date", "label": "Start Date"},
+        {"name": "endDate", "type": "date", "label": "End Date"},
+        {"name": "status", "type": "string", "label": "Status", "enum": ["Planned", "Active", "Completed", "On Hold"]}
+      ]
+    },
+    {
+      "key": "contract",
+      "label": "Contract",
+      "apiPath": "/contracts",
+      "referenceIdPattern": "CONT-{YYYY}-{SEQ}",
+      "enabled": true,
+      "fields": [
+        {"name": "title", "type": "string", "label": "Contract Title", "required": true},
+        {"name": "projectId", "type": "string", "label": "Project ID", "foreignKey": "project"},
+        {"name": "startDate", "type": "date", "label": "Start Date"},
+        {"name": "endDate", "type": "date", "label": "End Date"},
+        {"name": "value", "type": "number", "label": "Contract Value"}
+      ]
+    },
+    {
+      "key": "rfp",
+      "label": "RFP",
+      "apiPath": "/rfps",
+      "referenceIdPattern": "RFP-{YYYY}-{SEQ}",
+      "enabled": true,
+      "fields": [
+        {"name": "title", "type": "string", "label": "RFP Title", "required": true},
+        {"name": "projectId", "type": "string", "label": "Project ID", "foreignKey": "project"},
+        {"name": "dueDate", "type": "date", "label": "Due Date"},
+        {"name": "status", "type": "string", "label": "Status", "enum": ["Open", "Closed", "Awarded"]}
+      ]
+    },
+    {
+      "key": "bid",
+      "label": "Bid",
+      "apiPath": "/bids",
+      "referenceIdPattern": "BID-{YYYY}-{SEQ}",
+      "enabled": true,
+      "fields": [
+        {"name": "rfpId", "type": "string", "label": "RFP ID", "foreignKey": "rfp"},
+        {"name": "vendor", "type": "string", "label": "Vendor"},
+        {"name": "amount", "type": "number", "label": "Bid Amount"},
+        {"name": "status", "type": "string", "label": "Status", "enum": ["Submitted", "Accepted", "Rejected"]}
+      ]
+    },
+    {
+      "key": "report",
+      "label": "Report",
+      "apiPath": "/reports",
+      "referenceIdPattern": "REP-{YYYY}-{SEQ}",
+      "enabled": true,
+      "fields": [
+        {"name": "title", "type": "string", "label": "Report Title", "required": true},
+        {"name": "projectId", "type": "string", "label": "Project ID", "foreignKey": "project"},
+        {"name": "createdDate", "type": "date", "label": "Created Date"},
+        {"name": "content", "type": "string", "label": "Content"}
+      ]
+    },
+    {
+      "key": "aiAnalysis",
+      "label": "AI Analysis",
+      "apiPath": "/ai-analyses",
+      "referenceIdPattern": "AIAN-{YYYY}-{SEQ}",
+      "enabled": true,
+      "fields": [
+        {"name": "entityId", "type": "string", "label": "Entity ID"},
+        {"name": "entityType", "type": "string", "label": "Entity Type"},
+        {"name": "analysisResult", "type": "string", "label": "Analysis Result"},
+        {"name": "createdDate", "type": "date", "label": "Created Date"}
+      ]
+    },
+    {
+      "key": "chatSession",
+      "label": "Chat Session",
+      "apiPath": "/chat-sessions",
+      "referenceIdPattern": "CHAT-{YYYY}-{SEQ}",
+      "enabled": true,
+      "fields": [
+        {"name": "userId", "type": "string", "label": "User ID"},
+        {"name": "messages", "type": "array", "label": "Messages"},
+        {"name": "startedAt", "type": "date", "label": "Started At"},
+        {"name": "endedAt", "type": "date", "label": "Ended At"}
+      ]
+    }
+  ]
+}
