@@ -15,10 +15,10 @@ const fetchComplianceStatus = async (entityType: string, entityId: string) => {
 };
 
 const ComplianceCard: React.FC<ComplianceCardProps> = ({ entityId, entityType }) => {
-  const { data, error, isLoading } = useQuery(
-    ["complianceStatus", entityType, entityId],
-    () => fetchComplianceStatus(entityType, entityId)
-  );
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["complianceStatus", entityType, entityId],
+    queryFn: () => fetchComplianceStatus(entityType, entityId),
+  });
 
   if (isLoading)
     return (
